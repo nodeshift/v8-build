@@ -1,0 +1,6 @@
+is_clang = false 
+is_debug = false 
+target_cpu = "ppc64" 
+use_custom_libcxx = false 
+use_cxx11 = true 
+is_component_build = false

@@ -1,0 +1,6 @@
+FROM DOCKER_TARGET_LINKrt-nodejs-build-base-img-TEMPLATE_ARCH:latest
+
+# To test V8 master in release mode, we just use default settings
+ENV MODE="TEMPLATE_MODE"
+ENV V8_BRANCH="TEMPLATE_BRANCH"
+ENTRYPOINT ["bash", "/home/entryPoint.sh"]

@@ -1,0 +1,11 @@
+is_component_build = true
+target_cpu = "s390x"
+v8_target_cpu = "s390x"
+use_goma = false
+goma_dir = "None"
+v8_enable_backtrace = true
+v8_enable_disassembler = true
+v8_enable_object_print = true
+v8_enable_verify_heap = true
+is_debug = true
+use_custom_libcxx = false

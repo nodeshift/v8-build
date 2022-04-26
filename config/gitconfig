@@ -1,0 +1,20 @@
+[user]
+    name = Nobody
+    email = whoami@redhat.com
+[core]
+    editor = vim
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+[alias]
+    st = status
+    ci = commit
+    ciam = commit -am
+    cia = commit -a
+    co = checkout
+    cp = cherry-pick
+    br = branch
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[color]
+	ui = auto
+[push]
+	default = simple
