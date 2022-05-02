@@ -9,7 +9,7 @@ If you need to report a V8 related issue specific to PowerPC or S390x platforms 
 # Building and testing V8 using Docker
 Docker images are used for building and testing V8 for ppc64le and s390x running Linux.
 
-We have 2 types of images. The `base` image is used for development purposes. The `test` image, which is built on top of the base image, is used for automatic build and test of V8 commits on Jenkins.
+We have 2 types of images. The `base` image provides the base configuration with the necessary development toolchains installed to build V8. The `test` image, built upon the base, is used to clone, build and test V8 commits by the Jenkins CI/CD pipeline.
 
 You can run the following to create a base image and use it for development purposes:
 ```
