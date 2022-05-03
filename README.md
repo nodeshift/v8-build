@@ -4,8 +4,6 @@ https://github.com/nodejs/node/blob/master/BUILDING.md
 
 We do not provide official support on V8 if it is used outside the realm of Node.js. V8 is built and tested using the minimum compiler versions currently supported by Node.js (current versions are detailed in the above link). We do not support any other compiler versions or toolchain.
 
-If you need to report a V8 related issue specific to PowerPC or S390x platforms please open a case using the Red Hat Customer Portal https://access.redhat.com/support/cases/
-
 # Building and testing V8 using Docker
 Docker images are used for building and testing V8 for ppc64le and s390x running Linux.
 
