@@ -38,7 +38,8 @@ RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 0
 # clone depot_tools and add it to your path
 RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 
-# build gn and run tests (running tests is optional)
+# build gn
+# (optional) run gn unittests
 # you may need to checkout older versions of gn if it's being used to build older versions of V8
 # use a platform specific `ninja` binary
 RUN git clone https://gn.googlesource.com/gn && \
@@ -55,13 +56,12 @@ ENV VPYTHON_BYPASS="manually managed python not supported by chrome operations"
 ENV V8_BRANCH="main"
 ENV MODE="release"
 
-# copy bin folder and any patches needed by jenkins
-# (this step may be optional when bulding V8 manually)
+# (optional) copy bin folder and patches needed by Jenkins CI/CD, not needed when building V8 manually
 COPY ./bin/ /home
 COPY ./patches/ /home/patches
 
-# setup git config (optional)
+# (optional) setup git config
 COPY ./config/gitconfig /root/.gitconfig
 
-# setup vim config (optional)
+# (optional) setup vim config
 RUN git clone https://github.com/john-yan/vimrc.git ~/.vim_runtime && bash ~/.vim_runtime/install_awesome_vimrc.sh
