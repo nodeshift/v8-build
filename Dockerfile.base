@@ -1,3 +1,18 @@
+#  Copyright 2022 Red Hat, Inc, and individual contributors.
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+
 FROM ubuntu:20.04
 
 WORKDIR /home
@@ -28,36 +43,40 @@ RUN apt-get update && \
     ninja-build \
     cmake
 
-# gclient dependencies
+# python dependencies
 RUN pip3 install httplib2 six
 
+# set gcc-8 as default
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 0
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 0
 
-# clone depot_tools and set path
+# clone depot_tools and add it to your path
 RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 
-# build gn and run tests
+# build gn
+# (optional) run gn unittests
+# you may need to checkout older versions of gn if it's being used to build older versions of V8
+# use a platform specific `ninja` binary
 RUN git clone https://gn.googlesource.com/gn && \
     cd gn && \
-    python build/gen.py && \
+    CXX=g++ python build/gen.py && \
     ninja -C out && \
     out/gn_unittests && \
     cp /home/gn/out/gn /bin/gn && \
     chmod +x /bin/gn
 
-# set env vars and args
+# set environment variables
 ENV PATH=$PATH:/home/depot_tools/
 ENV VPYTHON_BYPASS="manually managed python not supported by chrome operations"
 ENV V8_BRANCH="main"
 ENV MODE="release"
 
+# (optional) copy bin folder and patches needed by Jenkins CI/CD, not needed when building V8 manually
 COPY ./bin/ /home
 COPY ./patches/ /home/patches
 
-# setup git config
+# (optional) setup git config
 COPY ./config/gitconfig /root/.gitconfig
 
-# setup vim config
+# (optional) setup vim config
 RUN git clone https://github.com/john-yan/vimrc.git ~/.vim_runtime && bash ~/.vim_runtime/install_awesome_vimrc.sh
-
