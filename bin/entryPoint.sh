@@ -104,7 +104,7 @@ if [ "$V8_BRANCH" != "main" ]; then
 fi
 
 # copy args required for gn, build
-mkdir out/$MACHINE_ARCH
+mkdir -p out/$MACHINE_ARCH
 cp /home/$MACHINE_ARCH/$MODE.gn out/$MACHINE_ARCH/args.gn
 gn gen /home/v8/out/$MACHINE_ARCH
 ninja -C /home/v8/out/$MACHINE_ARCH -j $NPROC
