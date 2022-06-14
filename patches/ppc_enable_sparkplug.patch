@@ -1,0 +1,14 @@
+diff --git a/src/flags/flag-definitions.h b/src/flags/flag-definitions.h
+index 66adb213931..fee874dd869 100644
+--- a/src/flags/flag-definitions.h
++++ b/src/flags/flag-definitions.h
+@@ -178,8 +178,7 @@
+ #define ENABLE_CONTROL_FLOW_INTEGRITY_BOOL false
+ #endif
+ 
+-#if V8_TARGET_ARCH_PPC || V8_TARGET_ARCH_PPC64 || \
+-    (V8_TARGET_ARCH_S390X && COMPRESS_POINTERS_BOOL)
++#if (V8_TARGET_ARCH_S390X && COMPRESS_POINTERS_BOOL)
+ // TODO(v8:11421): Enable Sparkplug for these architectures.
+ #define ENABLE_SPARKPLUG false
+ #else
