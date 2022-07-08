@@ -42,7 +42,7 @@ if [[ ! -f /home/$MACHINE_ARCH/$MODE.gn ]] ; then
     git clone https://github.com/abseil/abseil-cpp.git && cd abseil-cpp
     git checkout master
     mkdir build && cd build
-    cmake -DABSL_BUILD_TESTING=ON -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON -DCMAKE_CXX_STANDARD=11 ..
+    cmake -DABSL_BUILD_TESTING=ON -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON ..
     MAKEFLAGS="-j$NPROC" cmake --build . --target all
     ctest -j$NPROC
     exit
