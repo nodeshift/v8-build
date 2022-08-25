@@ -35,8 +35,7 @@ TESTS = test-debug-stable     \
         test-debug-main     \
         test-release-main   \
         test-ptrcompr-main  \
-        test-jsargreverse-main \
-	test-abseil-master
+        test-jsargreverse-main
 
 TEST_IMAGES = $(foreach test, $(TESTS), $(test)-img)
 TEST_DOCKERFILE = $(foreach test, $(TESTS), Dockerfile.$(test))
