@@ -13,42 +13,31 @@
 #  limitations under the License.
 #
 
-FROM ubuntu:20.04
+# RHEL 8 is based on Fedora 28:
+# https://docs.fedoraproject.org/en-US/quick-docs/fedora-and-red-hat-enterprise-linux/index.html
+FROM fedora:28
 
 WORKDIR /home
 
-RUN apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
-RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
-RUN dpkg-reconfigure --frontend noninteractive tzdata
-
 # pre reqs
-RUN apt-get update && \
-    apt-get install -y python \
-    python3-pip \
-    curl \
-    pkg-config \
-    libnss3-dev \
-    libcups2-dev \
-    git \
+RUN yum -y install \
     vim \
-    libglib2.0-dev \
-    libpango1.0-dev \
-    libgconf2-dev \
-    libatk1.0-dev \
-    libgtk-3-dev \
-    wget \
-    clang \
-    g++-8 \
-    gcc-8 \
+    curl \
+    git \
+    python \
+    python3 \
     ninja-build \
-    cmake
+    make \
+    cmake \
+    gcc \
+    gcc-c++ \
+    glibc-static \
+    libstdc++-static \
+    glib2-devel \
+    libatomic
 
 # python dependencies
 RUN pip3 install httplib2 six
-
-# set gcc-8 as default
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 0
-RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 0
 
 # clone depot_tools and add it to your path
 RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
