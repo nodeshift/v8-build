@@ -23,6 +23,7 @@ WORKDIR /home
 RUN yum -y install \
     vim \
     curl \
+    wget \
     git \
     python \
     python3 \
