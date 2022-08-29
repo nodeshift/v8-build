@@ -18,7 +18,7 @@ pull_base_image:
 	docker pull $(IMG)
 
 run: pull_base_image
-	docker run -e "NPROC=$(NPROC)" $(IMG) bash -c "wget -O - https://raw.githubusercontent.com/nodeshift/v8-build/main/non_v8/$(NAME).sh | bash"
+	docker run -e "NPROC=$(NPROC)" $(IMG) bash -c "wget -O - https://raw.githubusercontent.com/nodeshift/v8-build/main/extra/$(NAME).sh | bash"
 	docker system prune -f
 
 .PHONY: pull_base_image run

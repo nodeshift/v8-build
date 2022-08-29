@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [[ -z "$NPROC" ]] ; then
   NPROC=$(nproc)
 fi
