@@ -21,6 +21,7 @@ WORKDIR /home
 
 # pre reqs
 RUN yum -y install \
+    tzdata \
     vim \
     curl \
     wget \
@@ -36,6 +37,9 @@ RUN yum -y install \
     libstdc++-static \
     glib2-devel \
     libatomic
+
+# set timezone
+ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 
 # python dependencies
 RUN pip3 install httplib2 six
