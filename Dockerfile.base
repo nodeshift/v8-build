@@ -25,6 +25,7 @@ RUN yum -y install \
     vim \
     curl \
     wget \
+    xz \
     git \
     python \
     python3 \
