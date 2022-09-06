@@ -34,7 +34,8 @@ TESTS = test-debug-stable     \
         test-release-beta     \
         test-debug-main     \
         test-release-main   \
-        test-ptrcompr-main  \
+        test-ptrcompr_release-main  \
+        test-ptrcompr_debug-main  \
         test-jsargreverse-main
 
 TEST_IMAGES = $(foreach test, $(TESTS), $(test)-img)
