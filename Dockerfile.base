@@ -41,7 +41,7 @@ RUN yum -y install \
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 
 # set the default python version
-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
+RUN alternatives --install /usr/bin/python python /usr/bin/python3.8 2
 
 # python dependencies
 RUN pip3 install httplib2 six requests
