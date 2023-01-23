@@ -98,5 +98,5 @@ gn gen /home/v8/out/$MACHINE_ARCH
 ninja -C /home/v8/out/$MACHINE_ARCH -j $NPROC
 
 # run tests
-python3 tools/run-tests.py -j $NPROC --time --progress=dots --timeout=240 --no-presubmit \
+python3.8 tools/run-tests.py -j $NPROC --time --progress=dots --timeout=240 --no-presubmit \
                                 --outdir=out/$MACHINE_ARCH --variants=exhaustive
