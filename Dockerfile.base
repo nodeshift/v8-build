@@ -13,9 +13,7 @@
 #  limitations under the License.
 #
 
-# RHEL 8 is based on Fedora 28:
-# https://docs.fedoraproject.org/en-US/quick-docs/fedora-and-red-hat-enterprise-linux/index.html
-FROM fedora:28
+FROM fedora:29
 
 WORKDIR /home
 
