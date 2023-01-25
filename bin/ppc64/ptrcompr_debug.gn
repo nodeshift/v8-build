@@ -1,4 +1,4 @@
-is_component_build = false
+is_component_build = true
 target_cpu = "ppc64"
 v8_target_cpu = "ppc64"
 use_goma = false
