@@ -13,7 +13,7 @@
 #  limitations under the License.
 #
 
-FROM fedora:29
+FROM fedora:32
 
 WORKDIR /home
 
@@ -26,7 +26,6 @@ RUN yum -y install \
     xz \
     git \
     python \
-    python38 \
     ninja-build \
     make \
     cmake \
@@ -39,9 +38,6 @@ RUN yum -y install \
 
 # set timezone
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
-
-# set the default python version
-RUN alternatives --install /usr/bin/python python /usr/bin/python3.8 0
 
 # python dependencies
 RUN pip3 install httplib2 six requests
