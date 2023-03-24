@@ -10,4 +10,3 @@ v8_enable_verify_heap = true
 use_custom_libcxx = false
 is_debug = true
 v8_enable_pointer_compression = true
-v8_enable_pointer_compression_shared_cage = true
