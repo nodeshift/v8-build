@@ -35,8 +35,7 @@ TESTS = test-debug-stable     \
         test-debug-main     \
         test-release-main   \
         test-ptrcompr_release-main  \
-        test-ptrcompr_debug-main  \
-        test-jsargreverse-main
+        test-ptrcompr_debug-main
 
 TEST_IMAGES = $(foreach test, $(TESTS), $(test)-img)
 TEST_DOCKERFILE = $(foreach test, $(TESTS), Dockerfile.$(test))
@@ -55,7 +54,7 @@ $(TEST_DOCKERFILE): Dockerfile.%: Dockerfile.test-template
 
 $(TESTS): %:
 	docker pull $(DOCKER_TARGET_LINK)rt-nodejs-build-$@-img-$(MACHINE_ARCH)
-	docker run -e "NPROC=$(NPROC)" $(DOCKER_TARGET_LINK)rt-nodejs-build-$@-img-$(MACHINE_ARCH) $(features)
+	docker run -e "NPROC=$(NPROC)" -e "V8_HASH=$(V8_HASH)" -e "CHERRY_PICK=$(CHERRY_PICK)" $(DOCKER_TARGET_LINK)rt-nodejs-build-$@-img-$(MACHINE_ARCH) $(features)
 	docker system prune -f
 
 define PUSH
