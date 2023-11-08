@@ -52,8 +52,8 @@ fetch v8
 cd v8
 
 # Iterate through passed features
-# They need to be passed to `make`, exmaple: `make NPROC=4 test-debug-master features="enable-simd"`
-# patches need to go as `diff` files under the `build\patches` folder, exmaple: `patches/enable-simd.patch`
+# They need to be passed to `make`, example: `make NPROC=4 test-debug-master features="enable-simd"`
+# patches need to go as `diff` files under the `build\patches` folder, example: `patches/enable-simd.patch`
 echo "===================================="
 echo "Features:"
 for arg in "$@"
@@ -74,21 +74,34 @@ git branch -at |\
 V8_BETA_BRANCH=$(sed '1q;d' v8-branches.txt)
 V8_STABLE_BRANCH=$(sed '2q;d' v8-branches.txt)
 
-if [ "$V8_BRANCH" != "main" ]; then
+# checkout a branch or a commit hash
+CHECKOUT=$V8_BRANCH
+if [[ -n "$V8_HASH" ]] ; then
+  CHECKOUT=$V8_HASH
+elif [ "$V8_BRANCH" != "main" ]; then
   if [ "$V8_BRANCH" == "beta" ]; then
-    V8_BRANCH=branch-heads/$V8_BETA_BRANCH
+    CHECKOUT=branch-heads/$V8_BETA_BRANCH
   elif [ "$V8_BRANCH" == "stable" ]; then
-    V8_BRANCH=branch-heads/$V8_STABLE_BRANCH
+    CHECKOUT=branch-heads/$V8_STABLE_BRANCH
   fi
 fi
 
 echo "===================================="
-echo "Checkout branch $V8_BRANCH"
+echo "Checkout $CHECKOUT"
 echo "===================================="
 
-git checkout $V8_BRANCH
-if [ "$V8_BRANCH" != "main" ]; then
+git checkout $CHECKOUT
+if [ "$CHECKOUT" != "main" ]; then
     gclient sync
+fi
+
+# cherry-pick a CL if needed
+if [[ -n "$CHERRY_PICK" ]] ; then
+  REF=refs/changes/$CHERRY_PICK
+  echo "===================================="
+  echo "Cherry picking $REF"
+  echo "===================================="
+  git fetch https://chromium.googlesource.com/v8/v8 $REF && git cherry-pick FETCH_HEAD
 fi
 
 # copy args required for gn, build
