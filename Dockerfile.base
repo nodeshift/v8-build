@@ -29,6 +29,7 @@ RUN yum -y install \
     ninja-build \
     make \
     cmake \
+    ccache \
     gcc \
     gcc-c++ \
     glibc-static \
