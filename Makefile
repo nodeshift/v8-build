@@ -54,7 +54,7 @@ $(TEST_DOCKERFILE): Dockerfile.%: Dockerfile.test-template
 
 $(TESTS): %:
 	docker pull $(DOCKER_TARGET_LINK)rt-nodejs-build-$@-img-$(MACHINE_ARCH)
-	docker run -e "NPROC=$(NPROC)" -e "V8_HASH=$(V8_HASH)" -e "CHERRY_PICK=$(CHERRY_PICK)" $(DOCKER_TARGET_LINK)rt-nodejs-build-$@-img-$(MACHINE_ARCH) $(features)
+	docker run -e "NPROC=$(NPROC)" -e "V8_HASH=$(V8_HASH)" -e "CHERRY_PICK=$(CHERRY_PICK)" -v $(CCACHE_DIR):/root/.ccache $(DOCKER_TARGET_LINK)rt-nodejs-build-$@-img-$(MACHINE_ARCH) $(features)
 	docker system prune -f
 
 define PUSH
