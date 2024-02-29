@@ -13,29 +13,38 @@
 #  limitations under the License.
 #
 
-FROM fedora:32
+FROM registry.access.redhat.com/ubi8/ubi:latest
 
 WORKDIR /home
 
 # pre reqs
-RUN yum -y install \
+RUN dnf -y install \
     tzdata \
     vim \
     curl \
     wget \
     xz \
     git \
-    python \
+    python39 \
     ninja-build \
     make \
     cmake \
-    ccache \
-    gcc \
-    gcc-c++ \
-    glibc-static \
-    libstdc++-static \
+    procps-ng \
+    gcc-toolset-12 \
+    gcc-toolset-12-libatomic-devel \
     glib2-devel \
-    libatomic
+    patch
+
+# extra packages (optional)
+RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+RUN dnf -y install ccache
+
+# patch stl_algobase.h system header file
+# patch was originally generated with `diff -ru0`
+# caused by this bug https://gcc.gnu.org/bugzilla/show_bug.cgi?id=113960
+# TODO(miladfarca): Remove when fix is backported to gcc-toolset-12, also remove patch from pre-req list
+COPY ./patches/ /home/patches
+RUN patch -p0 /opt/rh/gcc-toolset-12/root/usr/include/c++/12/bits/stl_algobase.h patches/stl_algobase.h.diff
 
 # set timezone
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
@@ -48,12 +57,10 @@ RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 
 # build gn
 # (optional) run gn unittests
-# you may need to checkout older versions of gn if it's being used to build older versions of V8
 # use a platform specific `ninja` binary
 RUN git clone https://gn.googlesource.com/gn && \
     cd gn && \
-    CXX=g++ python build/gen.py && \
-    ninja -C out && \
+    scl enable gcc-toolset-12 'CXX=g++ python3 build/gen.py && ninja -C out' && \
     out/gn_unittests && \
     cp /home/gn/out/gn /bin/gn && \
     chmod +x /bin/gn
