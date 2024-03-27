@@ -8,5 +8,6 @@ v8_enable_disassembler = true
 v8_enable_object_print = true
 v8_enable_verify_heap = true
 is_debug = true
+symbol_level = 0
 use_custom_libcxx = false
 cc_wrapper = "ccache"

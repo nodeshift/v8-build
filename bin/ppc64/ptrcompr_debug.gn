@@ -9,5 +9,6 @@ v8_enable_object_print = true
 v8_enable_verify_heap = true
 use_custom_libcxx = false
 is_debug = true
+symbol_level = 0
 v8_enable_pointer_compression = true
 cc_wrapper = "ccache"
