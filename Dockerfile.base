@@ -32,19 +32,11 @@ RUN dnf -y install \
     procps-ng \
     gcc-toolset-12 \
     gcc-toolset-12-libatomic-devel \
-    glib2-devel \
-    patch
+    glib2-devel
 
 # extra packages (optional)
 RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 RUN dnf -y install ccache
-
-# patch stl_algobase.h system header file
-# patch was originally generated with `diff -ru0`
-# caused by this bug https://gcc.gnu.org/bugzilla/show_bug.cgi?id=113960
-# TODO(miladfarca): Remove when fix is backported to gcc-toolset-12, also remove patch from pre-req list
-COPY ./patches/ /home/patches
-RUN patch -p0 /opt/rh/gcc-toolset-12/root/usr/include/c++/12/bits/stl_algobase.h patches/stl_algobase.h.diff
 
 # set timezone
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
