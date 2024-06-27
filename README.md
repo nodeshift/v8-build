@@ -1,5 +1,5 @@
 # Disclaimer
-[V8](https://v8.dev/) is a community supported project. Our team at Red Hat maintains currency of the latest V8 releases to be used by Node.js on Linux on IBM Power (ppcle64), AIX and Linux on IBM zSystems / LinuxONE (s390x). The official list of Node.js platforms, along with their respective toolchains, can be found at:
+[V8](https://v8.dev/) is a community supported project. Our team at Red Hat maintains currency of the latest V8 releases to be used by Node.js on IBM Power and IBM zSystems. The official list of Node.js platforms, along with their respective toolchains, can be found at:
 https://github.com/nodejs/node/blob/master/BUILDING.md
 
 We do not provide official support on V8 if it is used outside the realm of Node.js. V8 is built and tested using the minimum compiler versions currently supported by Node.js (current versions are detailed in the above link). We do not support any other compiler versions or toolchain.
