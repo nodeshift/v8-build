@@ -48,7 +48,7 @@ echo "Parallel Build/Test (-j):" $NPROC
 echo "===================================="
 
 # fetch latest v8
-fetch v8
+DEPOT_TOOLS_BOOTSTRAP_PYTHON3=0 fetch v8
 cd v8
 
 # Iterate through passed features
