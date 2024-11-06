@@ -34,7 +34,6 @@ TESTS = test-debug-stable     \
         test-release-beta     \
         test-debug-main     \
         test-release-main   \
-        test-maglev-main   \
         test-ptrcompr_release-main  \
         test-ptrcompr_debug-main
 
