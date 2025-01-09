@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#  Copyright 2022 Red Hat, Inc, and individual contributors.
+#  Copyright 2025 Red Hat, Inc, and individual contributors.
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -19,9 +19,9 @@ if [[ -z "$NPROC" ]] ; then
   NPROC=$(nproc)
 fi
 
-git clone https://github.com/abseil/abseil-cpp.git && cd abseil-cpp
+git clone https://github.com/google/highway.git && cd highway
 git checkout master
 mkdir build && cd build
-cmake .. -DABSL_BUILD_TESTING=ON -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON
-MAKEFLAGS="-j$NPROC" cmake --build . --target all
-ctest -j$NPROC
+cmake .. -DHWY_WARNINGS_ARE_ERRORS:BOOL=ON -DCMAKE_BUILD_TYPE=Release
+make -j$NPROC
+make test -j$NPROC
