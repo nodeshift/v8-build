@@ -42,7 +42,7 @@ RUN dnf -y install ccache
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 
 # python dependencies
-python3 -m ensurepip
+RUN python3 -m ensurepip
 RUN pip3 install httplib2 six requests filecheck
 
 # clone depot_tools and add it to your path
