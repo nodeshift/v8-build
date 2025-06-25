@@ -9,3 +9,4 @@ use_custom_libcxx = false
 is_debug = true
 symbol_level = 0
 cc_wrapper = "ccache"
+treat_warnings_as_errors = false

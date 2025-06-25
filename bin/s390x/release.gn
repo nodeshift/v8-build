@@ -8,3 +8,4 @@ v8_enable_verify_heap = true
 is_debug = false
 use_custom_libcxx = false
 cc_wrapper = "ccache"
+treat_warnings_as_errors = false

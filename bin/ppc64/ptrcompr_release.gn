@@ -9,3 +9,4 @@ use_custom_libcxx = false
 is_debug = false
 v8_enable_pointer_compression = true
 cc_wrapper = "ccache"
+treat_warnings_as_errors = false
