@@ -10,3 +10,4 @@ is_debug = true
 symbol_level = 0
 v8_enable_pointer_compression = true
 cc_wrapper = "ccache"
+treat_warnings_as_errors = false
