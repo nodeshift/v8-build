@@ -1,0 +1,13 @@
+is_component_build = true
+target_cpu = "ppc64"
+v8_target_cpu = "ppc64"
+v8_enable_backtrace = true
+v8_enable_disassembler = true
+v8_enable_object_print = true
+v8_enable_verify_heap = true
+use_custom_libcxx = false
+is_debug = true
+symbol_level = 0
+cc_wrapper = "ccache"
+treat_warnings_as_errors = false
+v8_enable_maglev = true
